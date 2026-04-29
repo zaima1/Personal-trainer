@@ -10,7 +10,7 @@ type CustomerListProps = {
   setCustomer: React.Dispatch<React.SetStateAction<CustomerType>>;
   customer: CustomerType;
 };
-function CustomerList({ customer,setCustomer }: CustomerListProps) {
+function CustomerLists({ customer,setCustomer }: CustomerListProps) {
 
     const [customers, setCustomers] = useState<Customer[]>([])
 
@@ -88,4 +88,4 @@ function CustomerList({ customer,setCustomer }: CustomerListProps) {
         )
 }
 
-export default CustomerList;
+export default CustomerLists;

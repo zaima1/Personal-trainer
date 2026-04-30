@@ -6,6 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import type {  TrainingType } from '../types';
+import TrainingForm from './TrainingForm';
 
 
 type TrainingListProps = {
@@ -36,41 +37,11 @@ export default function AddTraining({ training,setTraining }: TrainingListProps)
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
-      Add Customer
+      Add Training
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Customer</DialogTitle>
-        <DialogContent>
-            <TextField
-              required
-              margin="dense"
-              label="Date"
-              value={training.date}
-              onChange={e => setTraining({...training, date: e.target.value})}
-              fullWidth
-              variant="standard"
-            />
-              <TextField
-              required
-              margin="dense"
-              label=" Duration"
-              value={training.duration}
-              onChange={e => setTraining({...training, duration: parseInt(e.target.value)})}
-              fullWidth
-              variant="standard"
-            />
-              <TextField
-              required
-              margin="dense"
-              label="Activity"
-              value={training.activity}
-              onChange={e => setTraining({...training, activity: e.target.value})}
-              fullWidth
-              variant="standard"
-            />
-           
-            
-        </DialogContent>
+        <DialogTitle>New Training</DialogTitle>
+        <TrainingForm training={training} setTraining={setTraining}/>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSubmit}>

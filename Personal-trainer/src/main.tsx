@@ -7,7 +7,8 @@ import React from 'react';
 import CustomerList from './components/CustomerList.tsx';
 import type { CustomerType, TrainingType } from './types.ts';
 import Training from './components/Training.tsx';
-function rooter(){   const [customer, setCustomer] = useState <CustomerType>({
+import Home from './components/Home.tsx';
+function Root(){   const [customer, setCustomer] = useState <CustomerType>({
    firstName: "",
    lastName:"",
    streetaddress:"",
@@ -30,19 +31,26 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children:[{
-      element:<CustomerList customer={customer}setCustomer={setCustomer}/>,
+      element:<Home/>,
       index:true
     },
     {
       path:"training",
       element:<Training training={training} setTraining={setTraining}/>
       
+    },
+   {
+      path:"customerlist",
+      element:<CustomerList customer={customer} setCustomer={setCustomer}/>
+      
     }]
   },
 ]);
+return<RouterProvider router={router}/>
+}
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+  <Root/>
   </React.StrictMode>
 )
-}
+

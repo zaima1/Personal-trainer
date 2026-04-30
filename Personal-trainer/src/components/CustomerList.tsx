@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Customer, CustomerType } from "../types";
-import { DataGrid, GridActionsCell, GridActionsCellItem } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Icon, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import AddCustomer from "./AddCustomer";
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -40,14 +40,14 @@ function CustomerLists({ customer,setCustomer }: CustomerListProps) {
     ]
 
     const getCustomers = () => {
-        fetch(import.meta.env.VITE_API_URL_CUSTOMER + "/customers")
+        fetch(import.meta.env.VITE_API_URL_CUSTOMER + "customers")
             .then(response => {
                 if (!response.ok)
                     throw new Error("Error ");
 
                 return response.json();
             })
-            .then(data => setCustomers(data._embedded.customers))
+            .then(data =>{console.log(data); setCustomers(data._embedded.customers)})
             .catch(err => console.log(err));
     }
 
@@ -79,7 +79,7 @@ function CustomerLists({ customer,setCustomer }: CustomerListProps) {
             <DataGrid 
             columns={columns}
             rows={customers}
-            getRowId={row => row._link.self.href}
+            getRowId={row => row._links.self.href}
             autoPageSize
             rowSelection={false}
             />

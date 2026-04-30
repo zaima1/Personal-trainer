@@ -36,7 +36,7 @@ function Training({training, setTraining}: TrainingListProps ) {
     ]
 
     const getCustomers = () => {
-        fetch(import.meta.env.VITE_API_URL_TRAINING + "/trainings")
+        fetch(import.meta.env.VITE_API_URL_TRAINING + "trainings")
             .then(response => {
                 if (!response.ok) 
                     throw new Error("Error ");
@@ -75,7 +75,7 @@ function Training({training, setTraining}: TrainingListProps ) {
             <DataGrid 
             columns={columns}
             rows={trainings}
-            getRowId={row => row._link.self.href}
+            getRowId={row => row._links.self.href}
             autoPageSize
             rowSelection={false}
             />

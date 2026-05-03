@@ -16,8 +16,8 @@ export default function CustomerForm({customer, setCustomer}:CustomerListProps){
               required
               margin="dense"
               label="First name"
-              value={customer.firstName}
-              onChange={e => setCustomer({...customer, firstName: e.target.value})}
+              value={customer.firstname}
+              onChange={e => setCustomer({...customer, firstname: e.target.value})}
               fullWidth
               variant="standard"
             />
@@ -25,8 +25,8 @@ export default function CustomerForm({customer, setCustomer}:CustomerListProps){
               required
               margin="dense"
               label="Last name"
-              value={customer.lastName}
-              onChange={e => setCustomer({...customer, lastName: e.target.value})}
+              value={customer.lastname}
+              onChange={e => setCustomer({...customer, lastname: e.target.value})}
               fullWidth
               variant="standard"
             />

@@ -1,5 +1,8 @@
 import TextField from "@mui/material/TextField";
 import type { TrainingType } from "../types";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
+import React from "react";
 
 type TrainingListProps = {
   setTraining: React.Dispatch<React.SetStateAction<TrainingType>>;
@@ -8,17 +11,17 @@ type TrainingListProps = {
 
 export default function TrainingForm( {training, setTraining}: TrainingListProps){
 
+    const [newValue, setValue] =React.useState<Dayjs|null>(dayjs("19-10-2026"));
     return(
         <>
-           <TextField
-              required
-              margin="dense"
-              label="Date"
-              type='date'
-              value={training.date}
-              onChange={e => setTraining({...training, date: e.target.value})}
-              fullWidth
-              variant="standard"
+           <DatePicker
+              
+            label="Date"
+            value={training.date ? dayjs(training.date, "DD-MM-YYYY") : null}
+            onChange={(newValue) =>
+                setTraining({...training,
+                    date: newValue ? newValue.toISOString() : ""
+                }) }
             />
               <TextField
               required

@@ -27,9 +27,20 @@ export default function AddTraining({ training,setTraining }: TrainingListProps)
 
   const handleSubmit = () => {
     setTraining({
-        date: "",
-        duration: 0,
-        activity: ""
+       id:0,
+    date:"",
+    duration: 0,
+    activity: "",
+    customer:{
+      id:0,
+      firstname: "",
+      lastname:"",
+      streetadress: "",
+      postcode: "",
+      city: "",
+      email: "", 
+      phone: ""}
+      
     })
     handleClose();
   };

@@ -15,15 +15,15 @@ function CustomerLists({ customer,setCustomer }: CustomerListProps) {
     const [customers, setCustomers] = useState<Customer[]>([])
 
     const columns: GridColDef[] = [
-        { field: "firstName", headerName: "First name" },
-        { field: "lastName", headerName: "Last name" },
+        { field: "firstname", headerName: "First name" },
+        { field: "lastname", headerName: "Last name" },
         { field: "streetaddress",width: 150, headerName: "Address" },
         { field: "postcode", headerName: "Postcode" },
         { field: "city", headerName: "City" },
         { field: "email", width: 150,headerName: "E-mail" },
         { field: "phone", width: 150, headerName: "Phone number" },
         {
-            field: "_link.self.href",
+            field: "_links.self.href",
             headerName: "",
             sortable: false,
             filterable: false,

@@ -26,8 +26,8 @@ export default function AddCustomer({ customer,setCustomer }: CustomerListProps)
 
   const handleSubmit = () => {
     setCustomer({
-        firstName: "",
-        lastName:"",
+        firstname: "",
+        lastname:"",
         streetaddress:"",
         postcode:"",
         city:"",

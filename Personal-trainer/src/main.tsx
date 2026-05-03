@@ -9,8 +9,8 @@ import type { CustomerType, TrainingType } from './types.ts';
 import Training from './components/Training.tsx';
 import Home from './components/Home.tsx';
 function Root(){   const [customer, setCustomer] = useState <CustomerType>({
-   firstName: "",
-   lastName:"",
+   firstname: "",
+   lastname:"",
    streetaddress:"",
    postcode:"",
    city:"",
@@ -19,9 +19,21 @@ function Root(){   const [customer, setCustomer] = useState <CustomerType>({
   })
 
   const [training, setTraining] = useState<TrainingType>({
+    id:0,
     date:"",
     duration: 0,
-    activity: ""
+    activity: "",
+    customer:{
+      id:0,
+      firstname: "",
+      lastname:"",
+      streetadress: "",
+      postcode: "",
+      city: "",
+      email: "", 
+      phone: ""
+    }
+
   })
 
 const router = createBrowserRouter([

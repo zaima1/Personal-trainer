@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import AddTraining from "./AddTraining";
 import type {  Trainings,  TrainingType } from "../types";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
-import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
+import type { GridColDef } from '@mui/x-data-grid';
 import { Stack } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import dayjs from "dayjs";
 
 type TrainingListProps = {
   setTraining: React.Dispatch<React.SetStateAction<TrainingType>>;
@@ -14,24 +14,18 @@ function Training({training, setTraining}: TrainingListProps ) {
 
     const [trainings, setTrainings] = useState<Trainings[]> ([]);
     const columns: GridColDef[] = [
-        { field: "date", headerName: "Date" },
+       {
+        field: "date",
+         headerName: "Date",
+        valueFormatter: (params: any) =>
+            dayjs(params.value).format("DD-MM-YYYY")
+},
         { field: "duration", headerName: "Duration" },
         { field: "activity",width: 150, headerName: "Activity" },
-        { field: "customer", headerName: "Customer" },
-        {
-            field: "_link.self.href",
-            headerName: "",
-            sortable: false,
-            filterable: false,
-            disableColumnMenu: true,
-            renderCell: (params: GridRenderCellParams) =>
-               <GridActionsCellItem
-               label= "Delete"
-               showInMenu
-               icon={<DeleteIcon color="error"/>}
-               onClick={()=> handelDelete(params.id as string)}
-               />
-        }
+        { 
+            field: "firstname", 
+            headerName: "First name" },
+        { field: "lastname", headerName: "First name" }
 
     ]
 
@@ -75,6 +69,7 @@ function Training({training, setTraining}: TrainingListProps ) {
             <DataGrid 
             columns={columns}
             rows={trainings}
+            
             getRowId={row => row._links.self.href}
             autoPageSize
             rowSelection={false}

@@ -73,7 +73,9 @@ const router = createBrowserRouter([
       
     }]
   },
-]);
+], {
+  basename: "/Personal-trainer"
+});
   return<RouterProvider router={router}/>
 }
 createRoot(document.getElementById('root')!).render(

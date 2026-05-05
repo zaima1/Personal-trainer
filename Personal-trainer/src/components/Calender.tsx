@@ -5,7 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import type { TrainingType } from "../types";
 
 const localizer = momentLocalizer(moment);
-
+// osittain otettu githubin tehty calender componentin koodia 
 type TrainingListProps = {
 
     trainings: TrainingType[];

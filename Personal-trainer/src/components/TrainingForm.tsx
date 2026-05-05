@@ -11,9 +11,10 @@ type TrainingListProps = {
 
 export default function TrainingForm({ training, setTraining }: TrainingListProps) {
 
-  
+  //dayjs vinkkiä kysytty tekoälyltä 
   return (
     <>
+    
       <DatePicker
         label="Date"
         value={training.date ? dayjs(training.date) : null}

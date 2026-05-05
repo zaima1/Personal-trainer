@@ -27,7 +27,7 @@ function Root(){   const [customer, setCustomer] = useState <CustomerType>({
       id:0,
       firstname: "",
       lastname:"",
-      streetadress: "",
+      streetaddress: "",
       postcode: "",
       city: "",
       email: "", 
@@ -37,7 +37,6 @@ function Root(){   const [customer, setCustomer] = useState <CustomerType>({
   })
 
 const router = createBrowserRouter([
-  // root route
   
   {
     path: "/",
@@ -58,11 +57,11 @@ const router = createBrowserRouter([
     }]
   },
 ]);
-return<RouterProvider router={router}/>
+  return<RouterProvider router={router}/>
 }
 createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <StrictMode>
   <Root/>
-  </React.StrictMode>
+  </StrictMode>
 )
 

@@ -1,50 +1,70 @@
 import { useEffect, useState } from "react";
 import AddTraining from "./AddTraining";
-import type {  Trainings,  TrainingType } from "../types";
-import { DataGrid } from "@mui/x-data-grid";
-import type { GridColDef } from '@mui/x-data-grid';
+import type { Trainings, TrainingType } from "../types";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Stack } from "@mui/material";
 import dayjs from "dayjs";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { fetchTraining } from "../TrainingApi";
 
 type TrainingListProps = {
-  setTraining: React.Dispatch<React.SetStateAction<TrainingType>>;
-  training: TrainingType;
+    setTraining: React.Dispatch<React.SetStateAction<TrainingType>>;
+    training: TrainingType;
 };
-function Training({training, setTraining}: TrainingListProps ) {
+function Training({ training, setTraining }: TrainingListProps) {
 
-    const [trainings, setTrainings] = useState<Trainings[]> ([]);
+    const [trainings, setTrainings] = useState<Trainings[]>([]);
     const columns: GridColDef[] = [
-       {
-        field: "date",
-         headerName: "Date",
-        valueFormatter: (params: any) =>
-            dayjs(params.value).format("DD-MM-YYYY")
-},
+        {
+            field: "date",
+            headerName: "Date",
+            valueFormatter: (params: any) =>
+                dayjs(params.value).format("DD-MM-YYYY")
+        },
         { field: "duration", headerName: "Duration" },
-        { field: "activity",width: 150, headerName: "Activity" },
-        { 
-            field: "firstname", 
-            headerName: "First name" },
-        { field: "lastname", headerName: "First name" }
+        { field: "activity", width: 150, headerName: "Activity" },
+        {
+            field: "firstname",
+            headerName: "First name",
+            width: 150,
+            valueGetter: (value, row) => row.customer?.firstname ?? "",
+        },
+        {
+            field: "lastname",
+            headerName: "Last name",
+            width: 150,
+            valueGetter: (value, row) => row.customer?.lastname ?? "",
+        }, {
+            field: "delete",
+            headerName: "",
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params: GridRenderCellParams) =>
+               <GridActionsCellItem
+               label= "Delete"
+               showInMenu
+               icon={<DeleteIcon color="error"/>}
+               onClick={()=> handelDelete(params.row.id)}
+               />
+        }
+
+
 
     ]
 
     const getCustomers = () => {
-        fetch(import.meta.env.VITE_API_URL_TRAINING + "trainings")
-            .then(response => {
-                if (!response.ok) 
-                    throw new Error("Error ");
-
-                return response.json();
-            })
-            .then(data => setTrainings(data._embedded.trainings))
+            fetchTraining()
+            .then(
+            data => setTrainings(data))
             .catch(err => console.log(err));
     }
 
 
-    const handelDelete = (url: string) => {
+    const handelDelete = (id: number) => {
         if (window.confirm("Are you sure?")) {
-            fetch(url, {
+            fetch(import.meta.env.VITE_API_URL_TRAINING + "trainings/" + id, {
                 method: "DELETE"
             })
                 .then(response => {
@@ -55,28 +75,28 @@ function Training({training, setTraining}: TrainingListProps ) {
                 .then(() => getCustomers())
                 .catch(err => console.error(err))
 
-        }}
-        useEffect(()=> {
-            getCustomers();
-        }, []);
+        }
+    }
+    useEffect(() => {
+        getCustomers();
+    }, []);
 
-        return(
-            <>
-            <Stack sx={{mt:2, mb:2}} direction="row">
+    return (
+        <>
+            <Stack sx={{ mt: 2, mb: 2 }} direction="row">
                 <AddTraining training={training} setTraining={setTraining} />
             </Stack>
-            <div style={{width: "90%", height: 600, margin: "auto"}}>
-            <DataGrid 
-            columns={columns}
-            rows={trainings}
-            
-            getRowId={row => row._links.self.href}
-            autoPageSize
-            rowSelection={false}
-            />
+            <div style={{ width: "90%", height: 600, margin: "auto" }}>
+                <DataGrid
+                    columns={columns}
+                    rows={trainings}
+                    getRowId={(row) => row.id}
+                    autoPageSize
+                    rowSelection={false}
+                />
             </div>
-            </>
-        )
+        </>
+    )
 }
 
 export default Training;

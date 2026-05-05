@@ -6,12 +6,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import type { Customer, CustomerType } from '../types';
 import CustomerForm from './CustomerForm';
 
+
+
 type CustomerListProps = {
   setCustomer: React.Dispatch<React.SetStateAction<CustomerType>>;
-  customer: CustomerType;
-   handelAdd: (customer: CustomerType) => void;
+  customer: Customer;
+  handleUpdate: (url: string, updateCustomer: CustomerType) => void
 };
-export default function AddCustomer(props: CustomerListProps) {
+
+
+export default function EditCusomer( props : CustomerListProps) {
   const [open, setOpen] = useState(false);
   const [customers, setCustomers] = useState<CustomerType>({
     firstname: "",
@@ -20,10 +24,20 @@ export default function AddCustomer(props: CustomerListProps) {
     postcode: "",
     city: "",
     email: "",
-    phone: ""
-  })
+    phone:""
+
+  });
 
   const handleClickOpen = () => {
+    setCustomers({
+      firstname: props.customer.firstname,
+      lastname: props.customer.lastname,
+      streetaddress: props.customer.streetaddress,
+      postcode: props.customer.postcode,
+      city: props.customer.city,
+      email: props.customer.email,
+      phone: props.customer.phone
+    })
     setOpen(true);
   };
 
@@ -32,18 +46,18 @@ export default function AddCustomer(props: CustomerListProps) {
   };
 
   const handleSubmit = () => {
-    props.handelAdd(customers)
+    props.handleUpdate(props.customer._links.self.href, customers);
     handleClose();
   };
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add Customer
+      <Button size="small" onClick={handleClickOpen}>
+        EDIT
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New customer</DialogTitle>
-        <CustomerForm customer={customers} setCustomer={setCustomers}  />
+        <DialogTitle>Edit Customer</DialogTitle>
+        <CustomerForm customer={customers} setCustomer={setCustomers} />
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSubmit}>
@@ -52,6 +66,5 @@ export default function AddCustomer(props: CustomerListProps) {
         </DialogActions>
       </Dialog>
     </>
-
   );
 }

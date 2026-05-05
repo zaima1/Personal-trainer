@@ -30,7 +30,7 @@ export type Trainings ={
         id: number;
         firstname:string;
         lastname: string;
-        streetadress:string;
+        streetaddress:string;
         postcode: string;
         city: string;
         email:string;

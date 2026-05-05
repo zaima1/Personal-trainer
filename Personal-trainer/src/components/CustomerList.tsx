@@ -15,8 +15,8 @@ type CustomerListProps = {
 function CustomerLists({ customer, setCustomer }: CustomerListProps) {
 
     const [customers, setCustomers] = useState<Customer[]>([])
-    
-   
+
+
     const columns: GridColDef[] = [
         { field: "firstname", headerName: "First name" },
         { field: "lastname", headerName: "Last name" },
@@ -104,7 +104,7 @@ function CustomerLists({ customer, setCustomer }: CustomerListProps) {
     return (
         <>
             <Stack sx={{ mt: 2, mb: 2 }} direction="row">
-                <AddCustomer customer={customer} setCustomer={setCustomer}  handelAdd={handelAdd}/>
+                <AddCustomer customer={customer} setCustomer={setCustomer} handelAdd={handelAdd} />
             </Stack>
             <div style={{ width: "90%", height: 600, margin: "auto" }}>
                 <DataGrid

@@ -9,38 +9,69 @@ type TrainingListProps = {
   training: TrainingType;
 };
 
-export default function TrainingForm( {training, setTraining}: TrainingListProps){
+export default function TrainingForm({ training, setTraining }: TrainingListProps) {
 
-    const [newValue, setValue] =React.useState<Dayjs|null>(dayjs("19-10-2026"));
-    return(
-        <>
-           <DatePicker
-              
-            label="Date"
-            value={training.date ? dayjs(training.date, "DD-MM-YYYY") : null}
-            onChange={(newValue) =>
-                setTraining({...training,
-                    date: newValue ? newValue.toISOString() : ""
-                }) }
-            />
-              <TextField
-              required
-              margin="dense"
-              label=" Duration"
-              value={training.duration}
-              onChange={e => setTraining({...training, duration: parseInt(e.target.value)})}
-              fullWidth
-              variant="standard"
-            />
-              <TextField
-              required
-              margin="dense"
-              label="Activity"
-              value={training.activity}
-              onChange={e => setTraining({...training, activity: e.target.value})}
-              fullWidth
-              variant="standard"
-            />
-            </>
-    )
+  const [newValue, setValue] = React.useState<Dayjs | null>(dayjs("19-10-2026"));
+  return (
+    <>
+      <DatePicker
+        label="Date"
+        value={training.date ? dayjs(training.date) : null}
+        onChange={(newValue) =>
+          setTraining({
+            ...training,
+            date: newValue ? newValue.toISOString() : ""
+          })
+        }
+      />
+      <TextField
+        required
+        margin="dense"
+        label=" Duration"
+        value={training.duration}
+        onChange={e => setTraining({ ...training, duration: parseInt(e.target.value) })}
+        fullWidth
+        variant="standard"
+      />
+      <TextField
+        required
+        margin="dense"
+        label="Activity"
+        value={training.activity}
+        onChange={e => setTraining({ ...training, activity: e.target.value })}
+        fullWidth
+        variant="standard"
+      />
+      <TextField
+        required
+        margin="dense"
+        label="First name"
+        value={training.customer.firstname}
+        onChange={e => setTraining({
+          ...training,
+          customer: {
+            ...training.customer,
+            firstname: e.target.value
+          }
+        })}
+        fullWidth
+        variant="standard"
+      />
+      <TextField
+        required
+        margin="dense"
+        label="Last name"
+        value={training.customer.lastname}
+        onChange={e => setTraining({
+          ...training,
+          customer: {
+            ...training.customer,
+            lastname: e.target.value
+          }
+        })}
+        fullWidth
+        variant="standard"
+      />
+    </>
+  )
 }

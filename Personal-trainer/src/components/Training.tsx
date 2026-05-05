@@ -6,15 +6,17 @@ import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Stack } from "@mui/material";
 import dayjs from "dayjs";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { fetchTraining } from "../TrainingApi";
+import { fetchTraining, saveTraining } from "../TrainingApi";
 
 type TrainingListProps = {
     setTraining: React.Dispatch<React.SetStateAction<TrainingType>>;
     training: TrainingType;
+    setTrainings: React.Dispatch<React.SetStateAction<TrainingType[]>>;
+    trainings: TrainingType[];
 };
-function Training({ training, setTraining }: TrainingListProps) {
+function Training({ training, setTraining, trainings, setTrainings }: TrainingListProps) {
 
-    const [trainings, setTrainings] = useState<Trainings[]>([]);
+   
     const columns: GridColDef[] = [
         {
             field: "date",
@@ -42,12 +44,12 @@ function Training({ training, setTraining }: TrainingListProps) {
             filterable: false,
             disableColumnMenu: true,
             renderCell: (params: GridRenderCellParams) =>
-               <GridActionsCellItem
-               label= "Delete"
-               showInMenu
-               icon={<DeleteIcon color="error"/>}
-               onClick={()=> handelDelete(params.row.id)}
-               />
+                <GridActionsCellItem
+                    label="Delete"
+                    showInMenu
+                    icon={<DeleteIcon color="error" />}
+                    onClick={() => handelDelete(params.row.id)}
+                />
         }
 
 
@@ -55,9 +57,9 @@ function Training({ training, setTraining }: TrainingListProps) {
     ]
 
     const getCustomers = () => {
-            fetchTraining()
+        fetchTraining()
             .then(
-            data => setTrainings(data))
+                data => setTrainings(data))
             .catch(err => console.log(err));
     }
 
@@ -81,10 +83,16 @@ function Training({ training, setTraining }: TrainingListProps) {
         getCustomers();
     }, []);
 
+    const handelAdd = (training: TrainingType) => {
+        saveTraining(training)
+            .then(() => getCustomers())
+            .catch(err => console.error(err))
+    }
+
     return (
         <>
             <Stack sx={{ mt: 2, mb: 2 }} direction="row">
-                <AddTraining training={training} setTraining={setTraining} />
+                <AddTraining training={training} setTraining={setTraining} handelAdd={handelAdd} />
             </Stack>
             <div style={{ width: "90%", height: 600, margin: "auto" }}>
                 <DataGrid

@@ -30,6 +30,7 @@ function App() {
       <Link to={"/"}>Home</Link>
       <Link to={"/customerlist"}>Customer list</Link>
       <Link to={"/training"}>Training</Link>
+       <Link to={"/calender"}>Calender</Link>
       
     </nav>
    

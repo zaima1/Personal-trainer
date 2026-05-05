@@ -7,7 +7,7 @@ export const fetchCustomer = () => fetch(import.meta.env.VITE_API_URL_CUSTOMER +
 
         return response.json();
     })
-    
+
 export const saveCustomer = (customer: CustomerType) => {
     return (fetch(import.meta.env.VITE_API_URL_CUSTOMER + "customers", {
         method: "POST",
@@ -18,7 +18,7 @@ export const saveCustomer = (customer: CustomerType) => {
     })
         .then(response => {
             if (!response.ok)
-                throw new Error("Error adding new car");
+                throw new Error("Error adding new Customer");
             return response.json();
         })
     )

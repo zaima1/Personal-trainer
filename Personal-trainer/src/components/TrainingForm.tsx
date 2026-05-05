@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import type { TrainingType } from "../types";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import React from "react";
 
 type TrainingListProps = {
@@ -11,7 +11,7 @@ type TrainingListProps = {
 
 export default function TrainingForm({ training, setTraining }: TrainingListProps) {
 
-  const [newValue, setValue] = React.useState<Dayjs | null>(dayjs("19-10-2026"));
+  
   return (
     <>
       <DatePicker

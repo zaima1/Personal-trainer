@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AddTraining from "./AddTraining";
-import type { Trainings, TrainingType } from "../types";
+import type {TrainingType } from "../types";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { Stack } from "@mui/material";
@@ -30,13 +30,13 @@ function Training({ training, setTraining, trainings, setTrainings }: TrainingLi
             field: "firstname",
             headerName: "First name",
             width: 150,
-            valueGetter: (value, row) => row.customer?.firstname ?? "",
+            valueGetter: (_value, row) => row.customer?.firstname ?? "",
         },
         {
             field: "lastname",
             headerName: "Last name",
             width: 150,
-            valueGetter: (value, row) => row.customer?.lastname ?? "",
+            valueGetter: (_value, row) => row.customer?.lastname ?? "",
         }, {
             field: "delete",
             headerName: "",

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import type { Customer, CustomerType } from '../types';
+import type { CustomerType } from '../types';
 import CustomerForm from './CustomerForm';
 
 type CustomerListProps = {

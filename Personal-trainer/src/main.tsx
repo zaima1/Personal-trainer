@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { createBrowserRouter, data, RouterProvider } from 'react-router';
+import { createBrowserRouter,  RouterProvider } from 'react-router';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import CustomerList from './components/CustomerList.tsx';
 import type { CustomerType, TrainingType } from './types.ts';
